@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="WEB-INF/template/template.xhtml">
+    <ui:define name="title">Harpro Cloud</ui:define>
+
+    <ui:define name="content">   
+        <h:dataTable value="#{aWSController.domainNames}" var="o">
+            <h:column>
+                <!-- column header -->
+    		<f:facet name="header">Domain Names</f:facet>
+    		<!-- row record -->
+    		#{o}
+            </h:column>
+        </h:dataTable>
+        <h:dataTable value="#{aWSController.buckets}" var="o">
+            <h:column>
+                <!-- column header -->
+    		<f:facet name="header">Buckets</f:facet>
+    		<!-- row record -->
+    		#{o}
+            </h:column>
+        </h:dataTable>
+        <h:form id="createInstance"> 
+            <legend>Create Instance</legend>
+            <h:inputText id="instanceName" value="#{aWSController.instance}" /><br /><br />
+            <h:commandButton class="btn btn-primary" action="${aWSController.createInstance()}" value="Create" >
+                <f:ajax execute="@form" render="@none" />
+            </h:commandButton>                      
+        </h:form>
+        <h:form id="stopInstance"> 
+            <legend>Stop Instance</legend>
+            <h:inputText id="instanceName" value="#{aWSController.instance}" /><br /><br />
+            <h:commandButton class="btn btn-primary" action="${aWSController.stopInstance()}" value="Stop" >
+                <f:ajax execute="@form" render="@none" />
+            </h:commandButton>                      
+        </h:form>
+        <h:form id="startInstance"> 
+            <legend>Start Instance</legend>
+            <h:inputText id="instanceName" value="#{aWSController.instance}" /><br /><br />
+            <h:commandButton class="btn btn-primary" action="${aWSController.startInstance()}" value="Start" >
+                <f:ajax execute="@form" render="@none" />
+            </h:commandButton>                      
+        </h:form>
+    </ui:define>
+    
+</ui:composition>

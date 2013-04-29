@@ -4,7 +4,10 @@
  */
 package in.harpro.awscloud;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.ec2.AmazonEC2;
+import com.amazonaws.services.ec2.AmazonEC2Client;
 import com.amazonaws.services.ec2.model.StopInstancesRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +20,19 @@ public class StopInstance {
     
     private AmazonEC2 ec2;
     
-    public StopInstance(AmazonEC2 ec2)
+    public StopInstance(String accessKey, String secretKey)
     {
-        this.ec2=ec2;
+        if (ec2 == null) {
+            AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+            ec2 = new AmazonEC2Client(credentials);
+        }
     }
     
-    public void stopInstance()
+    public void stopInstance(String instance)
     {
-        String InstanceIDInJSP;//=request.getParameter("InstanceID");
+        String InstanceIDInJSP=instance;
         List<String> instancesToStop = new ArrayList<String>();
-        instancesToStop.add("");
+        instancesToStop.add(InstanceIDInJSP);
         StopInstancesRequest stoptr = new StopInstancesRequest();
         stoptr.setInstanceIds(instancesToStop);
         ec2.stopInstances(stoptr);

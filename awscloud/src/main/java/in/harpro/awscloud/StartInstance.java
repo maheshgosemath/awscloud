@@ -4,7 +4,10 @@
  */
 package in.harpro.awscloud;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.ec2.AmazonEC2;
+import com.amazonaws.services.ec2.AmazonEC2Client;
 import com.amazonaws.services.ec2.model.StartInstancesRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +20,19 @@ public class StartInstance {
     
     private AmazonEC2 ec2;
     
-    public StartInstance(AmazonEC2 ec2)
+    public StartInstance(String accessKey, String secretKey)
     {
-        this.ec2=ec2;
+        if (ec2 == null) {
+            AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+            ec2 = new AmazonEC2Client(credentials);
+        }
     }
     
-    public void startInstance()
+    public void startInstance(String instance)
     {
-        String InstanceIDInJSP;//=request.getParameter("InstanceID");
+        String InstanceIDInJSP=instance;
         List<String> instancesToStart = new ArrayList<String>();
-        instancesToStart.add("");
+        instancesToStart.add(InstanceIDInJSP);
         StartInstancesRequest stoptr = new StartInstancesRequest();
         stoptr.setInstanceIds(instancesToStart);
         ec2.startInstances(stoptr);

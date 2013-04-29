@@ -4,7 +4,10 @@
  */
 package in.harpro.awscloud;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.ec2.AmazonEC2;
+import com.amazonaws.services.ec2.AmazonEC2Client;
 import com.amazonaws.services.ec2.model.CreateTagsRequest;
 import com.amazonaws.services.ec2.model.Instance;
 import com.amazonaws.services.ec2.model.RunInstancesRequest;
@@ -21,16 +24,19 @@ public class CreateInstance {
     
     private AmazonEC2 ec2;
     
-    public CreateInstance(AmazonEC2 ec2)
+    public CreateInstance(String accessKey, String secretKey)
     {
-        this.ec2=ec2;
+        if (ec2 == null) {
+            AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+            ec2 = new AmazonEC2Client(credentials);
+        }
     }
     
-    public void createInstance()
+    public void createInstance(String instanc)
     {
-        String InstanceIDInJSP;//=request.getParameter("InstanceID");
+        String InstanceIDInJSP=instanc;//=request.getParameter("InstanceID");
         List<String> instancesToStart = new ArrayList<String>();
-        instancesToStart.add("");
+        instancesToStart.add(InstanceIDInJSP);
 
         //CREATE EC2 INSTANCES
         RunInstancesRequest runInstancesRequest = new RunInstancesRequest()

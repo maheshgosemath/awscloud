@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="WEB-INF/template/template.xhtml">
+    <ui:define name="title">Harpro Cloud</ui:define>
+
+    <ui:define name="content">    
+        <h1>Authenticate</h1>
+        <h:form>
+
+            <table align="center">
+
+                <tr>
+                    <td>AccessKey:</td>
+                    <td>
+                        <h:inputText id="accesskey" value="#{aWSController.accessKey}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>SecretKey:</td>
+                    <td>
+                        <h:inputSecret id="secretkey" redisplay="false" value="#{aWSController.secretKey}" />
+                    </td>
+                </tr>
+                <tr >
+                    <td colspan="2">
+
+                    </td>
+                </tr>
+                <tr >
+                    <td colspan="2">
+                        <h:messages errorStyle="color: red" />
+                    </td>
+                </tr>
+            </table>
+
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <h:commandButton class="btn btn-primary" action="${aWSController.config()}" value="Authenticate" />
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
