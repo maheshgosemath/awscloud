@@ -32,12 +32,8 @@ public class CreateInstance {
         }
     }
     
-    public void createInstance(String instanc)
+    public void createInstance()
     {
-        String InstanceIDInJSP=instanc;//=request.getParameter("InstanceID");
-        List<String> instancesToStart = new ArrayList<String>();
-        instancesToStart.add(InstanceIDInJSP);
-
         //CREATE EC2 INSTANCES
         RunInstancesRequest runInstancesRequest = new RunInstancesRequest()
          .withInstanceType("t1.micro")

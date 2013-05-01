@@ -104,7 +104,7 @@ public class AWSController {
     public void createInstance()
     {
         CreateInstance ci=new CreateInstance(accessKey, secretKey);
-        ci.createInstance(instance);
+        ci.createInstance();
     }
     
     /**

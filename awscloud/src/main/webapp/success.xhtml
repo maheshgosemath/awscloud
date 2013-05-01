@@ -6,25 +6,29 @@
     <ui:define name="title">Harpro Cloud</ui:define>
 
     <ui:define name="content">   
-        <h:dataTable value="#{aWSController.domainNames}" var="o">
-            <h:column>
-                <!-- column header -->
-    		<f:facet name="header">Domain Names</f:facet>
-    		<!-- row record -->
-    		#{o}
-            </h:column>
-        </h:dataTable>
-        <h:dataTable value="#{aWSController.buckets}" var="o">
-            <h:column>
-                <!-- column header -->
-    		<f:facet name="header">Buckets</f:facet>
-    		<!-- row record -->
-    		#{o}
-            </h:column>
-        </h:dataTable>
+        <div id="row-fluid">
+        <div id="span3">
+            <h:dataTable value="#{aWSController.domainNames}" var="o">
+                <h:column>
+                    <!-- column header -->
+                    <f:facet name="header">Domain Names</f:facet>
+                    <!-- row record -->
+                    #{o}
+                </h:column>
+            </h:dataTable>
+        </div>
+        <div id="span9">
+            <h:dataTable value="#{aWSController.buckets}" var="o">
+                <h:column>
+                    <!-- column header -->
+                    <f:facet name="header">Buckets</f:facet>
+                    <!-- row record -->
+                    #{o}
+                </h:column>
+            </h:dataTable>
+        </div>
         <h:form id="createInstance"> 
             <legend>Create Instance</legend>
-            <h:inputText id="instanceName" value="#{aWSController.instance}" /><br /><br />
             <h:commandButton class="btn btn-primary" action="${aWSController.createInstance()}" value="Create" >
                 <f:ajax execute="@form" render="@none" />
             </h:commandButton>                      
@@ -43,6 +47,7 @@
                 <f:ajax execute="@form" render="@none" />
             </h:commandButton>                      
         </h:form>
+        </div>
     </ui:define>
     
 </ui:composition>
